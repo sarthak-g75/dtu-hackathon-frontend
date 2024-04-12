@@ -22,39 +22,71 @@ const formInputs = [
 const Login = () => {
 
 
-  const history = useNavigate()
+  const navigate = useNavigate()
   const [formData, setformData] = useState({
     email: '',
     password: '',
   })
+
+  const [message, setMessage] = useState('');
+
   const handleChange = (e) => {
     setformData((prevData) => ({
       ...prevData,
       [e.target.name]: e.target.value,
     }))
   }
+
+
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+
     try {
-      const response = await axios.post(`${url}/login`, {
-        email: formData.email,
-        password: formData.password,
-      })
-      const { data } = response
-      // console.log(data)
-      if (data.success) {
-        // setAuth(!auth)
-        localStorage.setItem('token', `Bearer ${data.token}`)
-        setAuth(!auth)
-        history('/dashboard')
+        const response = await axios.post(`http://localhost:3000/user/login`, formData)
+
+      const { data } = response;
+
+      if (data.token) {
+        localStorage.setItem('auth_token', `Bearer ${data.token}`)
+        navigate('/events')
       } else {
-        alert('Please enter correct credentials')
+        setMessage(data.message);
       }
     } catch (error) {
       // console.log()
-      alert(error.response.data.message)
+      console.log('login try catch error');
+      console.log('Error: ', error);
     }
   }
+
+  async function tokenLogin(){
+    try{
+      let response = await axios.post('http://localhost:3000/user/login',{
+        headers:{
+          'auth': localStorage.getItem('auth_token')
+        }
+      })
+      
+      if(response.status === 401){
+        setMessage("Error Loggin In");
+      }else if(response.status === 200){
+        navigate('/events');
+      }else{
+        console.log('error in tokenlogin after response.status 200');
+      }
+    }catch(err){
+      console.log('try catch error in token login');
+      console.log('Error: ' + err);
+    }
+
+  }
+
+  useEffect(()=>{
+    if(localStorage.getItem('auth_token')){
+      tokenLogin();
+    }
+  })
+
   return (
     <div className='flex items-center justify-center mt-4'>
       <div className='flex flex-col items-center justify-center gap-8 px-8 py-10 bg-white rounded-lg shadow-lg '>
@@ -64,6 +96,9 @@ const Login = () => {
             Enter your credentials to access your <br />
             account
           </p>
+          {message ? 
+            <p className='text-red-600 bg-red-200 rounded-md border-2 border-solid border-red-500 p-0 px-10 '>{message}</p>
+            : <p></p>}
         </div>
 
         <form

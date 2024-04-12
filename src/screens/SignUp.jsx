@@ -6,8 +6,6 @@ import axios from 'axios'
 // const url = 'http://localhost:5000/api/auth'
 
 const formInputs = [
-  { name: 'fname', label: 'First Name', placeholder: 'John', type: 'text' },
-  { name: 'lname', label: 'Last Name', placeholder: 'Doe', type: 'text' },
   {
     name: 'email',
     label: 'Email',
@@ -32,26 +30,34 @@ const SignUp = () => {
     email: '',
     password: '',
   })
+
+  const [message, setMessage] = useState('');
+
   const handleChange = (e) => {
     setformData((prevData) => ({
       ...prevData,
       [e.target.name]: e.target.value,
     }))
   }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post(`${url}/create-user`, formData)
+      const response = await axios.post(`http://localhost:3000/user/signup`, formData);
       const { data } = response
-      if (data.success) {
+      if (response.status === 201) {
         localStorage.setItem('token', `Bearer ${data.token}`)
-        history('/dashboard')
+        history('/events')
         // setAuth(!auth)
+      }else{
+        setMessage('Error signing up');
       }
     } catch (error) {
-      alert(error.response.data.message)
+      console.log('error signup');
+      console.log('Error: ', error);
     }
   }
+
   return (
     <div className='flex items-center justify-center mt-4 '>
       <div className='flex flex-col items-center justify-center gap-8 px-8 py-6 bg-white rounded-lg shadow-lg '>
@@ -61,6 +67,9 @@ const SignUp = () => {
             Enter your information to create an <br />
             account
           </p>
+          {message ? 
+            <p className='text-red-600 bg-red-200 rounded-md border-2 border-solid border-red-500 p-0 px-10 '>{message}</p>
+            : <p></p>}
         </div>
 
         <form
