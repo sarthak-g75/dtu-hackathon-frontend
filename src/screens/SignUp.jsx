@@ -46,7 +46,7 @@ const SignUp = () => {
       const response = await axios.post(`http://localhost:3000/user/signup`, formData);
       const { data } = response
       if (response.status === 201) {
-        localStorage.setItem('token', `Bearer ${data.token}`)
+        localStorage.setItem('token', `${data.token}`)
         history('/events')
         // setAuth(!auth)
       }else{
