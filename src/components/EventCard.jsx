@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom'
 const EventCard = ({ imageUrl, title, description, venue ,id}) => {
     return (
-      <div className=" rounded overflow-hidden shadow-lg w-full">
+      <div className=" rounded overflow-hidden shadow-lg w-full bg-white">
       <div className="w-full h-52">
         <img className="w-full h-full object-cover" src={imageUrl} alt={title} />
       </div>

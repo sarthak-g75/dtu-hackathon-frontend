@@ -8,7 +8,7 @@
 
 
     return (
-      <div className="flex flex-col items-center justify-center mt-6">
+      <div className="flex flex-col items-center justify-center pt-6">
         {events.map(category => (
           <div key={category.category} className="mb-6">
             <h2 className="text-3xl font-bold text-center mb-2">{category.category.toUpperCase()}</h2>
