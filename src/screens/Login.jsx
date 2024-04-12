@@ -47,7 +47,7 @@ const Login = () => {
       const { data } = response;
 
       if (data.token) {
-        localStorage.setItem('auth_token', `Bearer ${data.token}`)
+        localStorage.setItem('auth_token', `${data.token}`)
         navigate('/events')
       } else {
         setMessage(data.message);
