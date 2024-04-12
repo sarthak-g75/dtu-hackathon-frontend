@@ -137,7 +137,7 @@ const Login = () => {
             className='font-bold underline'
             to={'/signin'}
           >
-            Login
+            Signup
           </Link>
         </h3>
       </div>
