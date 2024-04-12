@@ -1,6 +1,6 @@
 export   const events = [
     {
-      category: 'movies',
+      category: 'HOUSE PARTIES',
       data: [
         {
           id: 1,
