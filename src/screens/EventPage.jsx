@@ -60,6 +60,7 @@ const EventPage = () => {
     })
 
     let data = await response.json();
+    console.log(data);
     setIsSubscribed(data.subscribed);
   }
 
