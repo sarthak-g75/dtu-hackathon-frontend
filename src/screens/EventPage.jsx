@@ -48,7 +48,7 @@ const EventPage = () => {
         setMessage('');
       }, 2000)
     }
-
+    isSubscribedAlready();
   }
 
   async function isSubscribedAlready(){
