@@ -1,6 +1,7 @@
   import React from 'react';
-  import {events} from '../assets/data'
+  import {events, images} from '../assets/data'
   import EventCard from '../components/EventCard';
+import Slideshow from '../components/Slideshow';
 
 
   const Events = () => {
@@ -8,7 +9,8 @@
 
 
     return (
-      <div className="flex flex-col items-center justify-center mt-6">
+      <div className="flex flex-col items-center justify-center gap-4">
+        <Slideshow slides={images}/>
         {events.map(category => (
           <div key={category.category} className="mb-6">
             <h2 className="text-3xl font-bold text-center mb-2">{category.category.toUpperCase()}</h2>
