@@ -45,7 +45,7 @@ const Login = () => {
       if (data.success) {
         // setAuth(!auth)
         localStorage.setItem('token', `Bearer ${data.token}`)
-        setAuth(!auth)
+        // setAuth(!auth)
         history('/dashboard')
       } else {
         alert('Please enter correct credentials')
