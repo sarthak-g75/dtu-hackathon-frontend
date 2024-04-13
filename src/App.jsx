@@ -6,6 +6,7 @@ import Landing from "./screens/Landing"
 import Events from "./screens/Events"
 import EventPage from "./screens/EventPage"
 import HostEvent from "./screens/HostEvent"
+import MyEvents from "./screens/MyEvents"
 function App() {
 
 
@@ -14,7 +15,8 @@ function App() {
    <Navbar/>
    <Routes>
     <Route path='/' element={<Landing/>}/>  
-    <Route path='/add-event' element={<HostEvent/>}/>  
+    <Route path='/my-events' element={<MyEvents/>}/>  
+    {/* <Route path='/add-event' element={<HostEvent/>}/>   */}
     <Route path='/events' element={<Events/>}/>  
     <Route path='/login' element={<Login/>}/>  
     <Route path='/sign-up' element={<SignUp/>}/>  

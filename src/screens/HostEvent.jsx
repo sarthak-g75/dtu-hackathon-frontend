@@ -4,7 +4,7 @@ const HostEvent = () => {
     const [eventName, setEventName] = useState('');
 
     return (
-        <div className="flex flex-col items-center justify-center h-[90vh]">
+        <div className="flex flex-col items-center h-full">
             <div className="w-full max-w-md bg-white shadow-md rounded-lg p-6">
                 <label htmlFor="eventName" className="block text-gray-700 text-sm font-bold mb-2">Enter Event Name</label>
                 <input
