@@ -9,16 +9,16 @@ const EventPage = () => {
   const [isSubscribed, setIsSubscribed] = useState('');
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
+  const [qr, setQr] = useState("");
 
-  const handleQr =()=>{
-    
-  }
+
 
   async function getEventDetails(){
     let response = await fetch(`http://localhost:3000/user/getEventDetails/${eventId}`, {
       method: 'GET'
     })
     let data = await response.json();
+    console.log(data)
     setEventDetails(data.eventDetails[0]);
   }
 
@@ -69,10 +69,24 @@ const EventPage = () => {
     setIsSubscribed(data.subscribed);
   }
 
+  async function getQR(){
+    let response = await fetch(`http://localhost:3000/user/register/qr/${eventId}`, {
+      method: 'GET',
+      headers: {
+        'auth': localStorage.getItem('auth_token')
+      }
+    })
+
+    let data = await response.json();
+    setQr(data.uuid);
+  }
+
+
   useEffect(()=>{
     getEventDetails();
     isSubscribedAlready();
-  }, []);    
+  }, []);   
+  
 
   return (
     <div className="flex flex-col justify-center items-center h-screen">
@@ -92,7 +106,7 @@ const EventPage = () => {
             <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-full" onClick={subscribeToEvent}>Subscribe</button>
           )}
           {isSubscribed && (
-            <button onClick={handleQr} className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-full">Generate a QR</button>
+            <button onClick={getQR} className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-full">Get QR</button>
           ) }
         </div>
       </div>
