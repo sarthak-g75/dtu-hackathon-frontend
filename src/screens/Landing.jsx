@@ -4,7 +4,7 @@ import HostNavbar from '../components/HostNavbar'
 const Landing = () => {
   return (
     <div>
-        <HostNavbar/>
+        {/* <HostNavbar/> */}
         <Hero/>
     </div>
   )
