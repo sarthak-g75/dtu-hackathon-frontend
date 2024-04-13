@@ -5,7 +5,7 @@ import SignUp from "./screens/SignUp"
 import Landing from "./screens/Landing"
 import Events from "./screens/Events"
 import EventPage from "./screens/EventPage"
-import HostEvent from "./screens/HostEvent"
+import ManageEvent from "./screens/ManageEvent"
 import MyEvents from "./screens/MyEvents"
 function App() {
 
@@ -16,6 +16,7 @@ function App() {
    <Routes>
     <Route path='/' element={<Landing/>}/>  
     <Route path='/my-events' element={<MyEvents/>}/>  
+    <Route path='/manage-event/:id' element={<ManageEvent/>}/>  
     {/* <Route path='/add-event' element={<HostEvent/>}/>   */}
     <Route path='/events' element={<Events/>}/>  
     <Route path='/login' element={<Login/>}/>  

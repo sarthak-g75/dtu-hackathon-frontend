@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { images } from '../assets/data';
-import EventCard from '../components/EventCard'; // Assuming EventCard component is in the same directory
+// import EventCard from '../components/EventCard'; // Assuming EventCard component is in the same directory
 import HostEvent from './HostEvent'; // Assuming HostEvent component is in the same directory
+import EventCardHost from '../components/EventCardHost';
 
 const MyEvents = () => {
   // Sample event data
@@ -36,7 +37,7 @@ const MyEvents = () => {
       <HostEvent /> 
 
       {events.map(event => (
-        <EventCard
+        <EventCardHost
           key={event.id}
           imageUrl={event.imageUrl}
           title={event.title}
