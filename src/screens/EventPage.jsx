@@ -10,6 +10,10 @@ const EventPage = () => {
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
 
+  const handleQr =()=>{
+    
+  }
+
   async function getEventDetails(){
     let response = await fetch(`http://localhost:3000/user/getEventDetails/${eventId}`, {
       method: 'GET'
@@ -77,15 +81,20 @@ const EventPage = () => {
       <div>
         <img src={images[0]} alt={'hello'} className="w-full h-64 object-cover rounded-lg mb-4" />
       </div>
-      <div className="text-center px-4">
+      <div className="text-center px-4 flex flex-col ">
         <h1 className="text-2xl font-bold">{eventDetails.eventName}</h1>
         <p className="mb-2">Description of {eventDetails.eventName}</p>
         <p className="mb-4">Venue of {eventDetails.eventName}</p>
-        {isSubscribed ? (
-          <button className="bg-gray-400 text-gray-800 px-4 py-2 rounded-lg cursor-not-allowed w-full" disabled>Already Enrolled</button>
-        ) : (
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-full" onClick={subscribeToEvent}>Subscribe</button>
-        )}
+        <div className='flex flex-col gap-2'>
+          {isSubscribed ? (
+            <button className="bg-gray-400 text-gray-800 px-4 py-2 rounded-lg cursor-not-allowed w-full" disabled>Already Enrolled</button>
+          ) : (
+            <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-full" onClick={subscribeToEvent}>Subscribe</button>
+          )}
+          {isSubscribed && (
+            <button onClick={handleQr} className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-full">Generate a QR</button>
+          ) }
+        </div>
       </div>
     </div>
   </div>
