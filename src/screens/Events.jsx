@@ -23,6 +23,7 @@ import Slideshow from '../components/Slideshow';
 
     return (
       <div className="flex flex-col items-center justify-center gap-4">
+        {/* <Navbar/> */}
         <Slideshow slides={images}/>
 
         <div key={'LATEST EVENTS'} className="mb-6">

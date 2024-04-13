@@ -12,7 +12,7 @@ function App() {
 
   return (
    <>
-   <Navbar/>
+    <Navbar/>
    <Routes>
     <Route path='/' element={<Landing/>}/>  
     <Route path='/my-events' element={<MyEvents/>}/>  

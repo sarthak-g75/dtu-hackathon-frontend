@@ -25,7 +25,7 @@ const Navbar = () => {
         </div>  
         <div className='flex gap-2 items-center'>
 
-            <Link className='hover:underline px-2' to={'/events'}>Events</Link>
+            <Link className='hover:underline px-2' to={'/my-events'}>My Events</Link>
             {loggedIn ? 
             <button className='border-2 border-white text-white rounded-xl bg-blue-600 hover:bg-blue-800 hover:text-white px-2 p-1' to={'/login'} onClick={logoutUser}>Logout</button>
             :

@@ -1,9 +1,13 @@
 import {Link} from 'react-router-dom'
+import {images} from '../assets/data'
 const EventCard = ({ imageUrl, title, description, venue ,id}) => {
+  const randomIndex = Math.floor(Math.random() * images.length);
+  
+  const randomImageUrl = images[randomIndex];
     return (
       <div className=" rounded overflow-hidden shadow-lg w-full h-max bg-white">
       <div className="w-full h-52">
-        <img className="w-full h-full object-cover" src={imageUrl} alt={title} />
+        <img className="w-full h-full object-cover" src={randomImageUrl} alt={title} />
       </div>
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{title}</div>
