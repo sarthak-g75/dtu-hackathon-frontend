@@ -1,6 +1,9 @@
 import  {  useEffect,useState } from 'react'
 import { useParams } from 'react-router-dom'
 import {images} from '../assets/data'
+
+import QRCode from 'react-qr-code';
+
 const EventPage = () => {
   const params = useParams();
   const eventId = params.id;
@@ -56,6 +59,7 @@ const EventPage = () => {
   }
 
   async function isSubscribedAlready(){
+    console.log('here');
     let response = await fetch(`http://localhost:3000/user/userSubscribed/${eventId}`, {
       method: 'GET',
       headers: {
@@ -78,7 +82,8 @@ const EventPage = () => {
     })
 
     let data = await response.json();
-    setQr(data.uuid);
+    setQr(data.qrcode);
+    console.log(data);
   }
 
 
@@ -105,6 +110,7 @@ const EventPage = () => {
           ) : (
             <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-full" onClick={subscribeToEvent}>Subscribe</button>
           )}
+          {qr ? <QRCode value={qr}/> : <></>}
           {isSubscribed && (
             <button onClick={getQR} className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-full">Get QR</button>
           ) }

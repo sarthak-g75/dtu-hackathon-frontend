@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const HostEvent = () => {
     const [eventName, setEventName] = useState('');
-
+    
     return (
         <div className="flex flex-col items-center h-full">
             <div className="w-full max-w-md bg-white shadow-md rounded-lg p-6">
