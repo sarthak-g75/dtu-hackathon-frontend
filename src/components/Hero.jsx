@@ -15,7 +15,7 @@ const Hero = () => {
 
       {/* Content */}
       <div className="absolute inset-0 flex flex-col justify-center items-start text-lg px-4 gap-2 text-white">
-        <h1 className="text-4xl md:text-6xl font-bold text-center">Welcome to Event Management</h1>
+        <h1 className="text-4xl md:text-6xl font-bold text-center">Welcome to EagleEye</h1>
         <div className="flex flex-col gap-4 text-center">
           <div className='text-left'>
               <p>Plan and organize your events seamlessly.</p>

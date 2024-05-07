@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+const url = 'http://localhost:3000/user/event'
 const ManageZone = () => {
+    const {id} = useParams();
     const [zones, setZones] = useState([]);
     const [connections, setConnections] = useState([]);
 
@@ -9,16 +12,59 @@ const ManageZone = () => {
     const [connectionFrom, setConnectionFrom] = useState('');
     const [connectionTo, setConnectionTo] = useState('');
 
-    const handleAddZone = () => {
-    
+    const handleAddZone = async () => {
+        try {
+            const response = await axios.post(`${url}/addZone`, {
+                zoneName: newZone,
+                eventId:   id // Provide the event ID here
+            },{headers:{'auth': localStorage.getItem('auth_token')}});
+
+            if (response.status === 200) {
+                console.log("added")
+                setZones(prevZones => [...prevZones, newZone]);
+                setNewZone('');
+            } else {
+                console.error('Failed to add zone');
+                // Handle error case here
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            // Handle error case here
+        }
     };
 
-    const handleDeleteZone = () => {
-      
+    const handleDeleteZone = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/user/event/deleteZone',{
+                method: 'DELETE',
+                headers:{
+                    'auth': localStorage.getItem('auth_token'),
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({'zoneName': zoneToDelete, 'eventId': id})
+            })
+
+            let data = await response.json();
+            console.log(data);
+            if (response.status === 200) {
+                console.log("deleted"); 
+                // Remove the deleted zone from the zones state
+                setZones(prevZones => prevZones.filter(zone => zone !== zoneToDelete));
+                // Clear the zoneToDelete state
+                setZoneToDelete('');
+            } else {
+                console.error('Failed to delete zone');
+                // Handle error case here
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            // Handle error case here
+        }
     };
+    
 
     const handleAddConnection = () => {
-     
+        // Add logic for adding connection
     };
 
     return (
@@ -37,6 +83,13 @@ const ManageZone = () => {
                         value={newZone}
                         onChange={e => setNewZone(e.target.value)}
                         placeholder="Enter new zone name"
+                        className="w-full mt-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+                    />
+                    <input
+                        type="text"
+                        value={zoneToDelete}
+                        onChange={e => setZoneToDelete(e.target.value)}
+                        placeholder="Enter zone name to delete  "
                         className="w-full mt-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
                     />
                     <div className="flex mt-2">
